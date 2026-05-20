@@ -7,36 +7,39 @@ from credential import Credential
 def main_menu():
 
     print("Please Enter Your Choice\n")
-    choice = int(input("1. New User\n2. Existing User\n3. EXIT "))
-
-    if choice > 3 or choice < 1:
+    choice = input("1. New User\n2. Existing User\n3. EXIT ")
+    if not choice.isdigit():
         print("Invalid Choice")
+    else:
+        choice = int(choice)
+        if choice >= 3 or choice <= 1 and choice != int():
+            print("Invalid Choice")
 
     match choice:
 
         case 1:
-            match choice:
-                case 1:
-                    pass
             new_user()
             print("Thank You For Registration")
+        case 2:
+            existing_user()
+            pass
 
 
-def new_user():
+def new_user(name=None):
+    if name is None:
+        print("Enter Username: ")
 
-    print("Enter Username: ")
+        while True:
 
-    while True:
+            name = input().lower()
 
-        name = input().lower()
+            if search_user(name):
 
-        if search_user(name):
+                print("Username Already Exists!")
+                print("Please Enter A New Username: ")
 
-            print("Username Already Exists!")
-            print("Please Enter A New Username: ")
-
-        else:
-            break
+            else:
+                break
 
     web = input("Enter Website or App: ").lower()
 
@@ -51,6 +54,30 @@ def new_user():
     save_data(existing_data)
 
     print("User Added Successfully")
+
+
+def existing_user():
+
+    while True:
+
+        name = input("Enter Username: ").lower()
+
+        if search_user(name):
+            pass
+
+        else:
+            print("Username Doesn't Exist! \n" "Do you want to Register?\n")
+
+            register = input("Press y or n").lower()
+
+            if register == "y":
+                new_user(name)
+                print("User Added Successfully")
+            elif register == "n":
+                print("Thankyou!")
+                main_menu()
+            else:
+                print("Invalid choice! ")
 
 
 def load_data():
