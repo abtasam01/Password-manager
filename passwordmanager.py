@@ -57,4 +57,28 @@ class PasswordManager:
                 print("User Does Not Exist!")
 
 
-    
+    def new_website(self,name):
+        web = input("Enter Name Of The Website Or App You Want To Save: ")
+
+        if self.search_website(name,web):
+            print("Website/App Already Exists")
+        else:
+            pw = input("Please Enter Password")
+
+            confirm_pw = input("Please Re-enter Password To Confirm")
+
+            if pw == confirm_pw:
+
+                existing_data = self.load_data()
+
+                existing_data[name][web] = pw
+
+                self.save_data(existing_data)
+
+                print("Website/App Added successfully: ")
+            else:
+                print("Passwords Do Not Match: ")
+
+            
+        
+        

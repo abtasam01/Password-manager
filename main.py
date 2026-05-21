@@ -9,20 +9,20 @@ pm = PasswordManager()
 
 def main_menu():
 
-    print("Please Enter Your Choice\n")
+    print("Please Enter Your Choice: \n")
     main_menu_choice = input("1. New User\n2. Existing User\n3. EXIT ")
     if not main_menu_choice.isdigit():
-        print("Invalid Choice")
+        print("Invalid Choice! ")
     else:
         main_menu_choice = int(main_menu_choice)
         if main_menu_choice >= 3 or main_menu_choice <= 1 and main_menu_choice != int():
-            print("Invalid Choice")
+            print("Invalid Choice! ")
 
     match main_menu_choice:
 
         case 1:
             new_user()
-            print("Thank You For Registration")
+            print("Thank You For Registration! ")
         case 2:
             existing_user()
             pass
@@ -40,7 +40,7 @@ def new_user(name=None):
 
             if pm.search_user(name):
 
-                print("Username Already Exists!")
+                print("Username Already Exists! ")
                 print("Please Enter A New Username: ")
 
             else:
@@ -62,7 +62,7 @@ def new_user(name=None):
 
     pm.save_data(existing_data)
 
-    print("User Added Successfully")
+    print("User Added Successfully! ")
 
 
 def existing_user():
@@ -73,18 +73,18 @@ def existing_user():
 
         if pm.search_user(name):
             print(name)
-            print("Please Enter your choice: \n")
+            print("Please Enter Your Choice: \n")
             existing_user_choice = input(
-                "1. Show all data: \n"
-                "2. Add a new website or app: \n"
-                "3. Delete an existing website or app: \n"
-                "4. Show password: \n"
-                "5. Update password: \n"
+                "1. Show All Data: \n"
+                "2. Add A New Website Or App: \n"
+                "3. Delete An Existing Website Or App: \n"
+                "4. Show Password: \n"
+                "5. Update Password: \n"
                 "6. EXIT: \n"
             )
 
             if not existing_user_choice.isdigit():
-                print("Invalid choice! ")
+                print("Invalid Choice! ")
             else:
                 existing_user_choice = int(existing_user_choice)
                 if (
@@ -92,27 +92,27 @@ def existing_user():
                     or existing_user_choice < 1
                     and existing_user_choice != int()
                 ):
-                    print("Invalid choice! ")
+                    print("Invalid Choice! ")
 
             match existing_user_choice:
                 case 1:
                     pm.show_user_data(name)
                 case 2:
-                    pass
+                    pm.new_website(name)
 
         else:
-            print("Username Doesn't Exist! \n" "Do you want to Register?\n")
+            print("Username Doesn't Exist! \n" "Do You Want To Register?\n")
 
-            register = input("Press y or n").lower()
+            register = input("Press y Or n: ").lower()
 
             if register == "y":
                 new_user(name)
-                print("User Added Successfully")
+                print("User Added Successfully! ")
             elif register == "n":
-                print("Thankyou!")
+                print("Thankyou! ")
                 main_menu()
             else:
-                print("Invalid choice! ")
+                print("Invalid Choice! ")
 
 
 main_menu()
