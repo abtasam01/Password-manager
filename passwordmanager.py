@@ -92,6 +92,11 @@ class PasswordManager:
             print("This Website/App Does Not exist! ")
         
 
+    def show_password(self,name):
+        web = input("Enter The Website/App You Want To See: ")
+        existing_data = self.load_data()
+        if web in existing_data[name]:
+            print(f'The Password Of Your {web} is "{existing_data[name][web]}"')
+        else:
+            print("This Website/App Does Not exist! ")
             
-        
-        

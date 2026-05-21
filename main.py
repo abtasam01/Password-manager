@@ -101,6 +101,9 @@ def existing_user():
                     pm.new_website(name)
                 case 3:
                     pm.delete_existing_website(name)
+                case 4:
+                    pm.show_password(name)
+                
 
         else:
             print("Username Doesn't Exist! \n" "Do You Want To Register?\n")
