@@ -15,7 +15,7 @@ def main_menu():
         print("Invalid Choice! ")
     else:
         main_menu_choice = int(main_menu_choice)
-        if main_menu_choice >= 3 or main_menu_choice <= 1 and main_menu_choice != int():
+        if main_menu_choice > 3 or main_menu_choice < 1 and main_menu_choice != int():
             print("Invalid Choice! ")
 
     match main_menu_choice:

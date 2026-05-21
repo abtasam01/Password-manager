@@ -54,27 +54,30 @@ class PasswordManager:
                 print("User Does Not Exist!")
 
     def new_website(self, name):
-        web = input("Enter Name Of The Website Or App You Want To Save: ").lower()
+        web = input("Enter Name Of The Website Or App You Want To Add: ").lower()
 
         if self.search_website(name, web):
             print(f'This "{web}" Website/App Already Exists')
         else:
-            pw = input("Please Enter The Password")
+            while True:
+                pw = input("Please Enter The Password: ")
 
-            confirm_pw = input("Please Re-enter The Password To Confirm")
+                confirm_pw = input("Please Re-enter The Password To Confirm: ")
 
-            if pw == confirm_pw:
+                if pw == confirm_pw:
 
-                existing_data = self.load_data()
+                    existing_data = self.load_data()
 
-                existing_data[name][web] = pw
+                    existing_data[name][web] = pw
 
-                self.save_data(existing_data)
+                    self.save_data(existing_data)
 
-                print(f"{web} Added Successfully")
+                    print(f"{web} Added Successfully")
 
-            else:
-                print("Passwords Do Not Match: ")
+                    break
+
+                else:
+                    print("Passwords Do Not Match: ")
 
     def delete_existing_website(self, name):
 
@@ -88,7 +91,7 @@ class PasswordManager:
 
             self.save_data(existing_data)
 
-            print(f"{web}Deleted Successfully! ")
+            print(f"{web} Deleted Successfully! ")
 
         else:
 
@@ -112,23 +115,29 @@ class PasswordManager:
 
     def update_password(self, name):
 
-        web = input("Enter The Website/App You Want To Update : ")
+        web = input("Enter The Website/App You Want To Update: ")
 
         existing_data = self.load_data()
 
         if web in existing_data[name]:
 
-            new_pw = input("Please Enter The New Password")
+            while True:
+                new_pw = input("Please Enter The New Password: ")
 
-            confirm_new_pw = input("Please Re-enter The New Password To Confirm")
+                confirm_new_pw = input("Please Re-enter The New Password To Confirm: ")
 
-            if new_pw == confirm_new_pw:
+                if new_pw == confirm_new_pw:
 
-                existing_data[name][web] = new_pw
+                    existing_data[name][web] = new_pw
 
-                self.save_data(existing_data)
+                    self.save_data(existing_data)
 
-                print(f"{web} Password Updated successfully: ")
+                    print(f"{web} Password Updated successfully: ")
+
+                    break
+                else:
+                    print("Passwords Do Not Match: ")
+
 
         else:
 
