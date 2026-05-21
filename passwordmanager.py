@@ -1,6 +1,7 @@
 import json
 from credential import Credential
 
+
 class PasswordManager:
     def load_data(self):
 
@@ -12,14 +13,12 @@ class PasswordManager:
         except:
             return {}
 
-
-    def save_data(self,existing_data):
+    def save_data(self, existing_data):
 
         with open("passwords.json", "w") as f:
             json.dump(existing_data, f, indent=4)
 
-
-    def search_user(self,name) -> bool:
+    def search_user(self, name) -> bool:
 
         existing_data = self.load_data()
 
@@ -28,8 +27,7 @@ class PasswordManager:
         else:
             return False
 
-
-    def search_website(self,name, website) -> bool:
+    def search_website(self, name, website) -> bool:
 
         existing_data = self.load_data()
 
@@ -39,7 +37,6 @@ class PasswordManager:
                 return True
 
         return False
-    
 
     def show_user_data(self, name):
         existing_data = self.load_data()
@@ -56,16 +53,15 @@ class PasswordManager:
 
                 print("User Does Not Exist!")
 
-
-    def new_website(self,name):
+    def new_website(self, name):
         web = input("Enter Name Of The Website Or App You Want To Save: ").lower()
 
-        if self.search_website(name,web):
-            print("Website/App Already Exists")
+        if self.search_website(name, web):
+            print(f'This "{web}" Website/App Already Exists')
         else:
-            pw = input("Please Enter Password")
+            pw = input("Please Enter The Password")
 
-            confirm_pw = input("Please Re-enter Password To Confirm")
+            confirm_pw = input("Please Re-enter The Password To Confirm")
 
             if pw == confirm_pw:
 
@@ -75,28 +71,65 @@ class PasswordManager:
 
                 self.save_data(existing_data)
 
-                print("Website/App Added successfully: ")
+                print(f"{web} Added Successfully")
+
             else:
                 print("Passwords Do Not Match: ")
-    
 
-    def delete_existing_website(self,name):
+    def delete_existing_website(self, name):
+
         web = input("Enter The Website/App You Want To Delete: ").lower()
-        existing_data = self.load_data()
-        if web in existing_data[name]:
-            del existing_data[name][web]
-            self.save_data(existing_data)
-            print("Website/App Deleted Successfully! ")
-            
-        else:
-            print("This Website/App Does Not exist! ")
-        
 
-    def show_password(self,name):
-        web = input("Enter The Website/App You Want To See: ")
         existing_data = self.load_data()
+
         if web in existing_data[name]:
-            print(f'The Password Of Your {web} is "{existing_data[name][web]}"')
+
+            del existing_data[name][web]
+
+            self.save_data(existing_data)
+
+            print(f"{web}Deleted Successfully! ")
+
         else:
+
             print("This Website/App Does Not exist! ")
-            
+
+            print(f"{web} Do Not Exist")
+
+    def show_password(self, name):
+
+        web = input("Enter The Website/App You Want To See: ")
+
+        existing_data = self.load_data()
+
+        if web in existing_data[name]:
+
+            print(f'The Password Of Your {web} is "{existing_data[name][web]}"')
+
+        else:
+
+            print(f"{web} Do Not Exist")
+
+    def update_password(self, name):
+
+        web = input("Enter The Website/App You Want To Update : ")
+
+        existing_data = self.load_data()
+
+        if web in existing_data[name]:
+
+            new_pw = input("Please Enter The New Password")
+
+            confirm_new_pw = input("Please Re-enter The New Password To Confirm")
+
+            if new_pw == confirm_new_pw:
+
+                existing_data[name][web] = new_pw
+
+                self.save_data(existing_data)
+
+                print(f"{web} Password Updated successfully: ")
+
+        else:
+
+            print(f"{web} Do Not Exist")

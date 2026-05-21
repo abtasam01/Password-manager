@@ -10,7 +10,7 @@ pm = PasswordManager()
 def main_menu():
 
     print("Please Enter Your Choice: \n")
-    main_menu_choice = input("1. New User\n2. Existing User\n3. EXIT ")
+    main_menu_choice = input("1. New User\n2. Existing User\n3. EXIT \n")
     if not main_menu_choice.isdigit():
         print("Invalid Choice! ")
     else:
@@ -40,13 +40,13 @@ def new_user(name=None):
 
             if pm.search_user(name):
 
-                print("Username Already Exists! ")
+                print(f'This Username "{name}" Already Exists! ')
                 print("Please Enter A New Username: ")
 
             else:
                 break
 
-    web = input("Enter Website or App: ").lower()
+    web = input("Enter Website/App: ").lower()
 
     pw = input("Enter Password: ")
 
@@ -62,7 +62,7 @@ def new_user(name=None):
 
     pm.save_data(existing_data)
 
-    print("User Added Successfully! ")
+    print(f'User "{name}" Added Successfully! ')
 
 
 def existing_user():
@@ -103,16 +103,20 @@ def existing_user():
                     pm.delete_existing_website(name)
                 case 4:
                     pm.show_password(name)
-                
+                case 5:
+                    pm.update_password(name)
+                case 6:
+                    print("Thankyou! ")
+                    main_menu()
 
         else:
-            print("Username Doesn't Exist! \n" "Do You Want To Register?\n")
+            print(f'This "{name}" Username Does Not Exist! ')
+            print("Do You Want To Register?\n")
 
             register = input("Press y Or n: ").lower()
 
             if register == "y":
                 new_user(name)
-                print("User Added Successfully! ")
             elif register == "n":
                 print("Thankyou! ")
                 main_menu()
