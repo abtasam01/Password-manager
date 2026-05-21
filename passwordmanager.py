@@ -58,7 +58,7 @@ class PasswordManager:
 
 
     def new_website(self,name):
-        web = input("Enter Name Of The Website Or App You Want To Save: ")
+        web = input("Enter Name Of The Website Or App You Want To Save: ").lower()
 
         if self.search_website(name,web):
             print("Website/App Already Exists")
@@ -78,6 +78,19 @@ class PasswordManager:
                 print("Website/App Added successfully: ")
             else:
                 print("Passwords Do Not Match: ")
+    
+
+    def delete_existing_website(self,name):
+        web = input("Enter The Website/App You Want To Delete: ").lower()
+        existing_data = self.load_data()
+        if web in existing_data[name]:
+            del existing_data[name][web]
+            self.save_data(existing_data)
+            print("Website/App Deleted Successfully! ")
+            
+        else:
+            print("This Website/App Does Not exist! ")
+        
 
             
         
